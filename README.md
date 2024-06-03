@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+ Created a service on Nest JS that manages cron jobs using MongoDB for storage. The service allows users to create, update, delete, and retrieve cron jobs.
+ Cron jobs are triggered based on scheduled timings (weekly, monthly, etc.) and include a start date. The service is scalable to handle a large number of cron jobs
+ efficiently. Additionally, the service implements rate limiting and API throttling to ensure stability and prevent abuse. A webhook is also be added to receive data from other services and stores it in JSON format, assigning every received data with an ID and the creation date of the cron jobs. The service also stores the history of cron job triggers and their responses, all with timestamps for creation and updates
 
 ## Installation
 
