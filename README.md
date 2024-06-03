@@ -34,6 +34,9 @@
 $ npm install
 ```
 
+## Documents
+I have provided documentation on how to set up and run the repository, including its prerequisites, along with a document containing detailed unit test cases.
+
 ## Running the app
 
 ```bash
