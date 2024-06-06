@@ -73,6 +73,20 @@ export class CronJobController {
     }
   }
 
+  // Define a Get endpoint to retrive a single cron job
+  // @Get(':id')
+  // async getCronJob(@Param('id') id: string): Promise<CronJob> {
+  //   try {
+  //     const getCronJob = await this.cronJobService.getCronJob(id);
+  //     if (!getCronJob) {
+  //       throw new NotFoundException(`CronJob with ID ${id} not found`);
+  //     }
+  //     return getCronJob;
+  //   } catch (error) {
+  //     throw new InternalServerErrorException('Failed to fetch cron jobs');
+  //   }
+  // }
+
   // Define a GET endpoint to retrieve all cron jobs
   @Get()
   async getAllCronJobs(): Promise<CronJob[]> {
@@ -82,6 +96,23 @@ export class CronJobController {
     } catch (error) {
       // Handle any errors that occur
       throw new InternalServerErrorException('Failed to fetch cron jobs');
+    }
+  }
+}
+
+// Define a controller for webhook related endpoints
+@Controller('webhook')
+export class WebhookController {
+  // Inject the CronJobService into the controller
+  constructor(private readonly cronJobService: CronJobService) {}
+
+  // Define a GET endpoint to retrieve a single webhooks
+  @Get(':id')
+  async getWebhook(@Param('id') id: string): Promise<Webhook> {
+    try {
+      return await this.cronJobService.getWebhook(id);
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch webhooks');
     }
   }
 
@@ -96,13 +127,6 @@ export class CronJobController {
       throw new InternalServerErrorException('Failed to fetch webhooks');
     }
   }
-}
-
-// Define a controller for webhook related endpoints
-@Controller('webhook')
-export class WebhookController {
-  // Inject the CronJobService into the controller
-  constructor(private readonly cronJobService: CronJobService) {}
 
   // Define a POST endpoint to handle webhooks for a specific cron job
   @Post(':id')

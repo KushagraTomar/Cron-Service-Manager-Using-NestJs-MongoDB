@@ -157,6 +157,16 @@ export class CronJobService {
     }
   }
 
+  // Method to retrieve single cron job from the database
+  async getCronJob(id: string): Promise<CronJob> {
+    this.logger.log(`Retrieving the cron job with ID: ${id}`);
+    try {
+      return await this.cronJobModel.findById(id).exec();
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to retrieve cron jobs');
+    }
+  }
+
   // Method to retrieve all cron jobs from the database
   async getAllCronJobs(): Promise<CronJob[]> {
     this.logger.log('Retrieving all cron jobs');
@@ -168,6 +178,7 @@ export class CronJobService {
     }
   }
 
+
   // Method to retrieve all webhooks from the database
   async getAllWebhooks(): Promise<Webhook[]> {
     this.logger.log('Retrieving all webhooks');
@@ -178,6 +189,22 @@ export class CronJobService {
       throw new InternalServerErrorException('Failed to retrieve webhooks');
     }
   }
+
+// Method to retrive a single webhooks from the database
+async getWebhook(id: string): Promise<Webhook> {
+  this.logger.log('Retriving a single webhook');
+  try {
+    const getWebhook = await this.webhookModel.findById(id).exec();
+    if (!getWebhook) {
+      throw new InternalServerErrorException(
+        `Webhook with ID ${id} not found`,
+      );
+    }
+    return getWebhook;
+  } catch (error) {
+    throw new InternalServerErrorException('Failed to retrieve webhooks');
+  }
+}
 
   // Method to find a cron job by its ID
   async findCronJobById(id: string): Promise<CronJob> {
